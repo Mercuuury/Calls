@@ -1,0 +1,623 @@
+<!doctype html>
+<html class="no-js" lang="ru">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Карта инновационных решений</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta content="telephone=no" name="format-detection">
+        <!-- This make sence for mobile browsers. It means, that content has been optimized for mobile browsers -->
+        <meta name="HandheldFriendly" content="true">
+
+
+        <!--[if (gt IE 9)|!(IE)]><!-->
+        <link href="static/css/main.min.css" rel="stylesheet" type="text/css">
+        <!--<![endif]-->
+
+        <meta property="og:title" content="Карта инновационных решений" />
+        <meta property="og:description" content="Открытая платформа для поиска инноваций: расскажите о своём продукте городским и коммерческим заказчикам" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="532" />
+        <meta property="og:image" content="static/img/general/social.jpg" />
+        <meta property="og:image:height" content="240" />
+        <meta property="twitter:description" content="Открытая платформа для поиска инноваций: расскажите о своём продукте городским и коммерческим заказчикам" />
+        <link rel="image_src" href="static/img/general/social.jpg" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <script>
+            (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+        </script>
+
+
+        <!-- Google Tag Manager -->
+        <script>
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-M62BZ7S');
+        </script>
+        <!-- End Google Tag Manager -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    </head>
+
+    <body class="page cities-requests">
+
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M62BZ7S" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        <div class="page__wrapper">
+
+            <section class="section-header">
+                <header>
+                    <div class="header container-fluid">
+                        <div class="section-body align-items-center">
+                            <div class="section-body-lg align-items-center">
+                            <div class="section-body__left">
+                                <a href="https://innovationmap.innoagency.ru/" class="header__m-logo">
+                                    <img src="static/img/general/logo.svg">
+                                </a>
+                            <a href="https://innoagency.ru/" target="_blank" class="header__logo d-none d-lg-block">
+                                <img src="static/img/general/aim.svg">
+                            </a>
+                            <a class="header-collapse close d-lg-none" role="button">
+                                <div></div>
+                                <span></span>
+                            </a>                            
+                        </div>
+                            <div class="section-body__right">
+                                <div class="header-collapse-menu">
+                                    <a href="https://innoagency.ru/" target="_blank" class="header__logo d-lg-none">
+                                        <img src="static/img/general/aim.svg">
+                                    </a>
+                                    <nav class="header-nav">
+                                        <ul class="header-menu">
+                                            <li class="header-menu__item">
+                                                <a href="https://innovationmap.innoagency.ru/provider/" class="header-menu__link">
+                                                    <span>Инноваторам</span>
+                                                </a>
+                                            </li>
+                                            <li class="header-menu__item">
+                                                <a href="https://innovationmap.innoagency.ru/customer/" class="header-menu__link">
+                                                    <span>Заказчикам инноваций</span>
+                                                </a>
+                                            </li>
+                                            <li class="header-menu__item">
+                                                <a href="https://innovationmap.innoagency.ru/#catalog" class="header-menu__link">
+                                                    <span>Каталог решений</span>
+                                                </a>
+                                            </li>
+                                            <li class="header-menu__item">
+                                                <a href="https://innovationmap.innoagency.ru/calls" class="header-menu__link">
+                                                    <span>Городские запросы</span>
+                                                </a>
+                                            </li>
+                                            <li class="header-menu__item">
+                                                <a href="https://innovationmap.innoagency.ru/#special " class="header-menu__link">
+                                                    <span>Спецпроекты</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div class="section main">
+                    <div class="container-fluid req-cols">
+                        <div class="req-cols__left">
+                            <h1 class="main__title">Городские запросы</h1>
+                            <div class="main__subtitle">Актуальные задачи Правительства Москвы на&nbsp;поиск инновационных решений</div>
+                        </div>
+                        <div class="req-cols__right">
+                            <div class="requests-finish">
+                                <div class="requests-finish__date">
+                                    <b style="font-weight: 300;" id="count-active"></b>&nbsp;открытых запросов
+                                    <span>до&nbsp;30&nbsp;июня</span>
+                                </div>
+                                <div class="requests-finish__btn">
+                                    Успейте предложить свое решение!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+              <section class="section">
+                <div class="container-fluid">
+                    <div class="btn-group req-filters" role="group" id="req-filters">
+                        <div class="btn-group req-filters__btn-group" role="group">
+                            <select class="city-select" name="typeTask" id="typeTask-select" onclick="alert('1');" title="Тип задачи" data-selected-text-format="static" >
+                            </select>
+                        </div>
+						<div class="btn-group req-filters__btn-group" role="group">
+                            <select class="city-select" name="customer" id="customer-select" onclick="alert('2');" title="Заказчик" data-selected-text-format="static" >
+                            </select>
+                        </div>
+                        <div class="btn-group req-filters__btn-group" role="group">
+                            <select class="city-select" name="sphere" id="sphere-select" onclick="alert('3');" title="Сфера применения" data-selected-text-format="static" >
+                            </select>
+                        </div>
+                        <div class="btn-group req-filters__btn-group" role="group">
+                            <select class="city-select" name="tech" id="tech-select" onclick="alert('4');" title="Технология" data-selected-text-format="static" >
+                            </select>
+                        </div>
+                        <div class="custom-control custom-checkbox form-check req-filters__checkbox">
+                            <input type="checkbox" class="custom-control-input form-check-input" id="req-filters__checkbox" name="form-request-agree1" required>
+                            <label class="custom-control-label form-check-label" for="req-filters__checkbox"><span>Показывать архивные
+                        запросы</span>
+                            </label>
+                        </div>
+                    </div>
+					
+                    <div class="req-cards" id="req-cards">
+						
+                    </div>
+               
+
+                    <div class="more-link-wrap" id="more-link-wrap">
+                        <a class="more-link">Показать еще</a>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="section">
+                <div class="container-fluid">
+                    <div class="about">
+                        <h1 class="text-center">О нас</h1>
+                        <div class="reviews-container">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xl-4 col-12 mb-4 mb-xl-0">
+                                        <div class="reviews-name">
+                                            Отзывы заказчиков
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-8 col-12">
+                                        <div class="reviews-slider customers-rev">
+                                            <div class="review-item">
+                                                <div class="review-item__img-container">
+                                                    <div class="review-item__img" style="background-image: url('static/img/content/reviews-slider/В.Бабич.png')"></div>
+                                                </div>
+                                                <div class="review-item__content">
+                                                    <div class="review-item__title">
+                                                        Валерий Бабич
+                                                    </div>
+                                                    <div class="review-item__subtitle">
+                                                        Начальник управления по развитию информационных технологий Департамента строительства города Москвы
+                                                    </div>
+                                                    <div class="review-item__text">
+                                                        <p>Выражаю благодарность Агентству инноваций Москвы и команде Карты инновационных решений за плодотворное сотрудничество.</p>
+                                                        <p>Департамент строительства сформировал более 10 запросов на поиск инноваций. В&nbsp;результате совместной работы мы посмотрели десятки интересных продуктов и несколько из них уже внедряется в инфраструктуре
+                                                            города.</p>
+                                                    </div>
+                                                </div>
+                                            </div>                                           
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reviews-container">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xl-4 col-12 mb-4 mb-xl-0">
+                                        <div class="reviews-name">
+                                            Отзывы компаний
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-8 col-12">
+                                        <div class="reviews-slider customers-rev">
+                                            <div class="review-item">
+                                                <div class="review-item__img-container">
+                                                    <div class="review-item__img" style="background-image: url('static/img/content/reviews-slider/А.Рыжов.jpg')"></div>
+                                                </div>
+                                                <div class="review-item__content">
+                                                    <div class="review-item__title">
+                                                        Александр Рыжов
+                                                    </div>
+                                                    <div class="review-item__subtitle">
+                                                        генеральный директор Skyeer
+                                                    </div>
+                                                    <div class="review-item__text">
+                                                        <p>Мы создали облачную геоинформационную платформу, позволяющую визуализировать полученные с беспилотных летательных аппаратов и&nbsp;наземных сенсоров геопространственные данные и анализировать их.</p>
+                                                        <p>Благодаря участию в Городских запросах мы продемонстрировали продукт Департаменту строительства города Москвы и&nbsp;провели успешный пилот на&nbsp;одном из&nbsp;строительных объектов, сейчас готовим
+                                                            второй.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="review-item">
+                                                <div class="review-item__img-container">
+                                                    <div class="review-item__img" style="background-image: url('static/img/content/reviews-slider/М.Козлов.jpg')"></div>
+                                                </div>
+                                                <div class="review-item__content">
+                                                    <div class="review-item__title">
+                                                        Михаил Козлов
+                                                    </div>
+                                                    <div class="review-item__subtitle">
+                                                        Коммерческий директор O.Vision
+                                                    </div>
+                                                    <div class="review-item__text">
+                                                        <p>Мы представляем бесконтактную пропускную систему с технологией распознавания лиц для управления потоком людей и безопасностью входа на объект. Нейросеть позволяет за доли секунды считать лицо человека, определить наличие маски и температуру тела. </p>
+                                                        <p>Городские запросы позволили нам доказать эффективность своего решения в нескольких административных зданиях Департамента строительства города Москвы и на строительных объектах.</p>
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reviews-container">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xl-4 col-12 mb-4 mb-xl-0">
+                                        <div class="reviews-name">
+                                            Публикации в&nbsp;СМИ
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-8 col-12">
+                                        <div class="reviews-slider customers-rev">
+                                            <div class="review-item">
+                                                <div class="review-item__img-container">
+                                                    <div class="review-item__img" style="background-image: url('static/img/content/reviews-slider/rb-200.png')"></div>
+													 <!-- Если надо  с рамочкой  <div class="review-item__img review-item__img_is-logo" style="background-image: url('static/img/content/reviews-slider/rb-200.png')"></div>-->
+                                                </div>
+                                                <div class="review-item__content">
+                                                    <div class="review-item__title">
+                                                        Карта инновационных решений теперь доступна на портале i.moscow
+                                                    </div>
+                                                    <div class="review-item__subtitle">
+                                                        24.03.2021
+                                                    </div>
+                                                    <div class="review-item__text"><a href="https://rb.ru/news/karta-moskvy-dlya-innovacii/" target="_blank">Перейти к новости</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="review-item">
+                                                <div class="review-item__img-container">
+                                                    <div class="review-item__img" style="background-image: url('static/img/content/reviews-slider/mos-200.png')"></div>
+                                                </div>
+                                                <div class="review-item__content">
+                                                    <div class="review-item__title">
+                                                       Прорывные решения для новых вызовов: итоги 2020 года 
+                                                    </div>
+                                                    <div class="review-item__subtitle">
+                                                        09.01.2021
+                                                    </div>
+                                                    <div class="review-item__text"><a href="https://www.mos.ru/news/item/84954073/" target="_blank">Перейти к новости</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="review-item">
+                                                <div class="review-item__img-container">
+                                                    <div class="review-item__img" style="background-image: url('static/img/content/reviews-slider/mos-200.png')"></div>
+                                                </div>
+                                                <div class="review-item__content">
+                                                    <div class="review-item__title">
+                                                        Более двух тысяч продуктов и сервисов разместили на «Карте инновационных решений» в этом году
+                                                    </div>
+                                                    <div class="review-item__subtitle">
+                                                        28.12.2020
+                                                    </div>
+                                                    <div class="review-item__text"><a href="https://www.mos.ru/news/item/84642073/" target="_blank">Перейти к новости</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+											<div class="review-item">
+                                                <div class="review-item__img-container">
+                                                    <div class="review-item__img" style="background-image: url('static/img/content/reviews-slider/vc-200.png')"></div>
+                                                </div>
+                                                <div class="review-item__content">
+                                                    <div class="review-item__title">
+                                                        Проекты Агентства инноваций Москвы стали победителями и призерами международных и российских премий
+                                                    </div>
+                                                    <div class="review-item__subtitle">
+                                                       24.12.2020
+                                                    </div>
+                                                    <div class="review-item__text"><a href="https://vc.ru/cdp/191042-proekty-agentstva-innovaciy-moskvy-stali-pobeditelyami-i-prizerami-mezhdunarodnyh-i-rossiyskih-premiy" target="_blank">Перейти к новости</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+											<div class="review-item">
+                                                <div class="review-item__img-container">
+                                                    <div class="review-item__img" style="background-image: url('static/img/content/reviews-slider/РосГаз.png')"></div>
+                                                </div>
+                                                <div class="review-item__content">
+                                                    <div class="review-item__title">
+                                                        Наталья Сергунина: В Москве запустили Карту инновационных решений
+                                                    </div>
+                                                    <div class="review-item__subtitle">
+                                                        28.09.2020
+                                                    </div>
+                                                    <div class="review-item__text"><a href="https://rg.ru/2020/09/28/reg-cfo/natalia-sergunina-v-moskve-zapustili-kartu-innovacionnyh-reshenij.html
+
+" target="_blank">Перейти к новости</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+<footer class="page__footer">
+            <div class="section-body footer">
+                <div class="section-body__left">
+                    <a href="https://innoagency.ru/" class="footer__logo" target="_blank">
+                        <img src="static/img/general/aim.svg">
+                    </a>
+                    <h4>КАРТА ИННОВАЦИОННЫХ РЕШЕНИЙ</h4>
+                    <p class="footer_copiright">© ГБУ «Агентство инноваций Москвы», 2021</p>
+                </div>
+                <div class="section-body__right">
+                    <div>
+                        <h5>О проекте</h5>
+                        <ul class="footer-nav">
+                            <li class="footer-nav__item">
+                                <a href="https://innovationmap.innoagency.ru/#audience " class="footer-nav__link">
+
+                            Для кого?
+
+                        </a>
+                            </li>
+                            <li class="footer-nav__item">
+                                <a href="https://innovationmap.innoagency.ru/#faq" class="footer-nav__link">
+
+                            Часто задаваемые вопросы
+
+                        </a>
+                            </li>
+                            <li class="footer-nav__item">
+                                <a href="https://innovationmap.innoagency.ru/#special " class="footer-nav__link">
+
+                            Спецпроекты
+
+                        </a>
+                            </li>
+                            <li class="footer-nav__item">
+                                <a href="https://innovationmap.innoagency.ru/list " class="footer-nav__link">
+
+                            Перечень ИВП
+
+                        </a>
+                            </li>
+                        </ul>
+
+                        <h5 class="mt-3">Участнику</h5>
+
+                        <ul class="footer-nav">
+                            <li class="footer-nav__item">
+                                <a href="https://innovationmap.innoagency.ru/#catalog" class="footer-nav__link">
+
+                            Каталог решений
+
+                        </a>
+                            </li>
+                            <li class="footer-nav__item">
+                                <a href="https://innovationmap.innoagency.ru/calls " class="footer-nav__link">
+
+                            Запросы от города
+
+                        </a>
+                            </li>
+                            <li class="footer-nav__item">
+                                <a href="https://innovationmap.innoagency.ru/provider/" class="footer-nav__link">
+
+                            Инноваторам
+
+                        </a>
+                            </li>
+                            <li class="footer-nav__item">
+                                <a href="https://innovationmap.innoagency.ru/customer/" class="footer-nav__link">
+
+                            Заказчикам инноваций
+
+                        </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                            <h5>Хотите быть в курсе новостей?</h5>
+                            <form class="form-subscribe mb-5" id="form-subscribe">
+                                <input class="form-control emailmask" placeholder="email@website.com" name="email" type="text">
+                                <button type="submit" class="btn btn-black">Подписаться</button>
+                            </form>
+                            <div class="mb-3">
+                                <a href="mailto:innovationmap@develop.mos.ru" class="footer__link">innovationmap@develop.mos.ru</a>
+                            </div>
+                            <small>
+
+                            <a target="_blank"
+
+                               href="https://innoagency.ru/poryadok_reshenia.pdf">
+
+                                Порядок размещения решений на карте</a>
+
+                            <br/>
+							<a target="_blank"
+
+                               href="https://innoagency.ru/poryadok_zaprosi.pdf">
+
+                                Порядок размещения городских запросов </a>
+
+                            <br/>
+
+                            <a target="_blank"
+
+                               href="https://innoagency.ru/polzovatelskoe_soglashenie.pdf">
+
+                                Пользовательское соглашение</a>
+
+                            <br/>
+
+                            <a target="_blank"
+
+                               href="https://innoagency.ru/soglashenie_persdannie.pdf">
+
+                                Согласие на обработку персональных данных</a>
+
+                        </small>
+                        </div>
+                </div>
+            </div>
+        </footer>
+        <!--<script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'https://innovationmap.innoagency.ru/calls/gate.php',
+                    type:'POST',
+                    dataType: 'json',
+                    data: {
+                        'op': 'getOptions',
+                    },
+                }).done(function(res){
+                    $('#count-active').html(res.active);
+                    $.each(res.customer, function(k,v){
+                      $('<option value="'+v+'">'+v+'</option>').appendTo("select#customer-select");
+                    });
+                    $.each(res.typeTask, function(k,v){
+                      $('<option value="'+v+'">'+v+'</option>').appendTo("select#typeTask-select");
+                    });
+                    $.each(res.sphere, function(k,v){
+                      $('<option value="'+v+'">'+v+'</option>').appendTo("select#sphere-select");
+                    });
+                    $.each(res.tech, function(k,v){
+                      $('<option value="'+v+'">'+v+'</option>').appendTo("select#tech-select");
+                    });
+                    $('.city-select').selectpicker('refresh');
+                });
+                ajaxReq();
+
+
+                let prevTypeTask,prevCustomer,prevSphere,prevTech;
+                $("#typeTask-select").on('hide.bs.select', function(){
+                    if($('#typeTask-select').val() !== prevTypeTask){
+                        prevTypeTask = $('#typeTask-select').val();
+                    }else{
+                        $('#typeTask-select').val('');
+                        $('#typeTask-select').removeClass('active');
+                        ajaxReq();
+                    }
+                });
+                $("#customer-select").on('hide.bs.select', function(){
+                    if($('#customer-select').val() !== prevCustomer){
+                        prevCustomer = $('#customer-select').val();
+                    }else{
+                        $('#customer-select').val('');
+                        $('#customer-select').removeClass('active');
+                        ajaxReq();
+                    }
+                });
+                $("#sphere-select").on('hide.bs.select', function(){
+                    if($('#sphere-select').val() !== prevSphere){
+                        prevSphere = $('#sphere-select').val();
+                    }else{
+                        $('#sphere-select').val('');
+                        $('#sphere-select').removeClass('active');
+                        ajaxReq();
+                    }
+                });
+                $("#tech-select").on('hide.bs.select', function(){
+                    if($('#tech-select').val() !== prevTech){
+                        prevTech = $('#tech-select').val();
+                    }else{
+                        $('#tech-select').val('');
+                        $('#tech-select').removeClass('active');
+                        ajaxReq();
+                    }
+                });
+
+
+                $('select').on('change', function(){
+                    ajaxReq();
+                });
+                $('#req-filters__checkbox').on('click', function () {
+                    ajaxReq();
+                });
+            });
+            function ajaxReq(){
+                var arr = {};
+                if($('select[name="typeTask"]').val() != ''){
+                    typeTask = $('select[name="typeTask"]').val() || [];
+                    //arr['typeTask'] = typeTask.join(", ");
+                    arr['typeTask'] = $('select[name="typeTask"]').val();
+                }
+                if($('select[name="customer"]').val() != ''){
+                    customer = $('select[name="customer"]').val() || [];
+                    //arr['customer'] = customer.join(", ");
+                    arr['customer'] = $('select[name="customer"]').val();
+                }
+                if($('select[name="sphere"]').val() != ''){
+                    sphere = $('select[name="sphere"]').val() || [];
+                    //arr['sphere'] = sphere.join(", ");
+                    arr['sphere'] = $('select[name="sphere"]').val();
+                }
+                if($('select[name="tech"]').val() != ''){
+                    tech = $('select[name="tech"]').val() || [];
+                    //arr['tech'] = tech.join(", ");
+                    arr['tech'] = $('select[name="tech"]').val();
+                }
+                if ($('#req-filters__checkbox').is(':checked')){
+                    arr['archive'] = '';
+                }else{
+                    arr['archive'] = 'Нет';
+                }
+                $.ajax({
+                    url: 'https://innovationmap.innoagency.ru/calls/gate.php',
+                    type:'POST',
+                    dataType: 'json',
+                    data: {
+                        'filters' : arr,
+                        'op': 'getRequests',
+                    },
+                }).done(function(res){
+                    if(window.innerWidth <= 625){
+                        $("#req-cards").slick("unslick");
+                    }
+                    $('#req-cards').html(res.res);
+                    if(res.moreLink != 1){
+                        $('#more-link-wrap').hide();
+                    }else{
+                        $('#more-link-wrap').show();
+                        $('.req-card:nth-child(n + 7)').removeClass('visible');
+                        $('.more-link').removeClass('active');
+                        $('.more-link').html('Показать еще');
+                    }
+                    if(window.innerWidth <= 625){
+                        $("#req-cards").slick({
+                                    slidesToShow: 1,
+                                            slidesToScroll: 1,
+                                            dots: true,
+                                            infinite: false,
+                                            arrows: false,
+                                            autoplay: true,
+                                            autoplaySpeed: 15000,
+                                });
+                    }
+                });
+            };
+        </script> -->
+
+        <!-- Main scripts. You can replace it, but I recommend you to leave it here     -->
+        <script src="static/js/main.min.js"></script>
+        <script src="static/js/script.js"></script>
+    </body>
+
+</html>
