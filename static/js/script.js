@@ -8,10 +8,12 @@ let typeTaskArr = [
     'Комфортная среда',
     'Оптимизация процессов',
     'Повышение безопасности',
+    'Ресурсосбережение',
     'Сокращение сроков реабилитации'
 ];
 let customerArr = [
     'Департамент жилищно-коммунального хозяйства города Москвы',
+    'Департамент информационных техологий',
     'Департамент образования города Москвы',
     'Департамент природопользования города Москвы',
     'Департамент строительства города Москвы',
@@ -26,7 +28,8 @@ let sphereArr = [
     'Социальная сфера',
     'Спорт',
     'Строительство',
-    'Экология'
+    'Экология',
+    'Энергоэффективность'
 ]
 let techArr = [
     'RFID',
@@ -55,8 +58,21 @@ function sendRequest(url) {
         })
 }
 
+function parseDate(sqlDate){
+    let date = new Date(sqlDate);
+    let day = date.getDate();
+    let month = date.getMonth()+1;
+
+    if(day < 10)
+        day = "0" + day;
+    if(month < 10)
+        month = "0" + month;
+
+    return day + "." + month + "." + date.getFullYear();
+}
+
 function update(content) {
-    for(let i = 0; i < 2; i++){
+    for(let i = 0; i < 4; i++){
         cardsArr.push('<div class="req-card">\
             <div class="req-card__top">\
                 <div class="req-card__header">\
@@ -67,7 +83,7 @@ function update(content) {
                         <div class="department__name">Департамент (надо брать из бд)</div>\
                     </div>\
                 </div>\
-                <div class="req-card__date">' + content[0].expireDate + '</div>\
+                <div class="req-card__date">' + parseDate(content[0].expireDate) + '</div>\
                 <div class="req-card__name">' + content[0].callName + '</div>\
                 <div class="req-card__description">' + content[0].description + '</div>\
                 <div class="tags-list">Теги (надо брать из бд)</div>\
@@ -75,6 +91,7 @@ function update(content) {
             <div class="req-card__footer"><a target="_blank"\
                                                  href="https://innovationmap.innoagency.ru/request/?request=14"\
                                                  class="btn btn-outline-red">Откликнуться</a></div>\
+            <div class="req-card__options" hidden>A'+content[0].isArchived+' Департамент труда и социальной защиты города Москвы Здравоохранение Большие данные Автоматизация процессов</div>\
         </div>')
 
         cardsArr.push('<div class="req-card">\
@@ -88,11 +105,11 @@ function update(content) {
                     </div>\
                 </div>\
                 <div class="req-card__date">30.06.2021</div>\
-                <div class="req-card__name">Альтернатива реабилитационным VR-тренажерам для детей</div>\
+                <div class="req-card__name">АРХИВНЫЙАльтернатива реабилитационным VR-тренажерам для детей</div>\
                 <div class="req-card__description">Решения, направленные на формирование представлений об окружающем\
                     мире и выработку социальных навыков у детей, страдающих эпилепсией и судорожным синдромом</div>\
                 <div class="tags-list">\
-                    <a class="tag">Тег1</a>\
+                    <a class="tag">Большие данные</a>\
                     <a class="tag">Тег2</a>\
                     <a class="tag">Тег3</a>\
                 </div>\
@@ -100,21 +117,25 @@ function update(content) {
             <div class="req-card__footer"><a target="_blank"\
                                                  href="https://innovationmap.innoagency.ru/request/?request=14"\
                                                  class="btn btn-outline-red">Откликнуться</a></div>\
+            <div class="req-card__options" hidden>A1 Департамент труда и социальной защиты города Москвы Здравоохранение Большие данные Автоматизация процессов</div>\
         </div>')
 
-        cardsHtml.innerHTML += cardsArr[i]
-        cardsHtml.innerHTML += cardsArr[i+1]
+        setFilters();
     }
 }
 
 function defineByOption(cards, option){
     let count = 0;
     let length = cards.length;
-    for (let i = 0; i < length; i++)
-        if (cards[i].search(option) != -1){
-            cards.push(cards[i]);
-            count++;
-        }
+    for (let i = 0; i < length; i++){
+        if (option == 'A1')
+            count = cards.length;
+        else
+            if (cards[i].split('<div className="req-card__options" hidden>').pop().search(option) != -1){
+                cards.push(cards[i]);
+                count++;
+            }
+    }
     cards.splice(0, cards.length-count);
 }
 
@@ -124,15 +145,15 @@ function filterCards(options) {
     for (let i = 0; i < cardsArr.length; i++)
         filteredCardsArr.push(cardsArr[i]);
 
-    // defineByOption(filteredCardsArr, options.archive) //Фильтр по архивированности
+     defineByOption(filteredCardsArr, options.archive) //Фильтр по архивированности
 
-    defineByOption(filteredCardsArr, options.customer) //Фильтр по заказчикам
+     defineByOption(filteredCardsArr, options.customer) //Фильтр по заказчикам
 
-    // defineByOption(filteredCardsArr, options.sphere) //Фильтр по сфере применения
+     defineByOption(filteredCardsArr, options.sphere) //Фильтр по сфере применения
 
-    // defineByOption(filteredCardsArr, options.tech) //Фильтр по технологии
+     defineByOption(filteredCardsArr, options.tech) //Фильтр по технологии
 
-    // defineByOption(filteredCardsArr, options.typeTask) //Фильтр по типу задачи
+     defineByOption(filteredCardsArr, options.typeTask) //Фильтр по типу задачи
 
     cardsHtml.innerHTML = '';
     for(let i = 0; i < filteredCardsArr.length; i++)
@@ -204,7 +225,7 @@ $(document).ready(function () {
 });
 
 function setFilters(){
-    var arr = {};
+    let arr = {};
     if($('select[name="typeTask"]').val() != ''){
         typeTask = $('select[name="typeTask"]').val() || [];
         arr['typeTask'] = $('select[name="typeTask"]').val();
@@ -222,9 +243,10 @@ function setFilters(){
         arr['tech'] = $('select[name="tech"]').val();
     }
     if ($('#req-filters__checkbox').is(':checked')){
-        arr['archive'] = '';
+        arr['archive'] = 'A1';
     }else{
-        arr['archive'] = 'Нет';
+        arr['archive'] = 'A0';
     }
+
     filterCards(arr);
 }
