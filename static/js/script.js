@@ -72,7 +72,7 @@ function parseDate(sqlDate){
 }
 
 function update(content) {
-    for(let i = 0; i < 4; i++){
+    for(let i = 0; i < content.length; i++){
         cardsArr.push('<div class="req-card">\
             <div class="req-card__top">\
                 <div class="req-card__header">\
@@ -83,44 +83,41 @@ function update(content) {
                         <div class="department__name">Департамент (надо брать из бд)</div>\
                     </div>\
                 </div>\
-                <div class="req-card__date">' + parseDate(content[0].expireDate) + '</div>\
-                <div class="req-card__name">' + content[0].callName + '</div>\
-                <div class="req-card__description">' + content[0].description + '</div>\
+                <div class="req-card__date">' + parseDate(content[i].expireDate) + '</div>\
+                <div class="req-card__name">' + content[i].callName + '</div>\
+                <div class="req-card__description">' + content[i].briefDescription + '</div>\
                 <div class="tags-list">Теги (надо брать из бд)</div>\
             </div>\
             <div class="req-card__footer"><a target="_blank"\
                                                  href="https://innovationmap.innoagency.ru/request/?request=14"\
                                                  class="btn btn-outline-red">Откликнуться</a></div>\
-            <div class="req-card__options" hidden>A'+content[0].isArchived+' Департамент труда и социальной защиты города Москвы Здравоохранение Большие данные Автоматизация процессов</div>\
+            <div class="req-card__options" hidden>A'+content[i].isArchived+' Департамент труда и социальной защиты города Москвы Здравоохранение Большие данные Автоматизация процессов</div>\
         </div>')
+    }
+    setFilters();
 
-        cardsArr.push('<div class="req-card">\
-            <div class="req-card__top">\
-                <div class="req-card__header">\
-                    <div class="department">\
-                        <svg class="department__logo" width="44px" height="53px">\
-                            <use xlink:href="static/img/svg-symbols.svg#moscow-for-fill"></use>\
-                        </svg>\
-                        <div class="department__name">Департамент труда и социальной защиты города Москвы</div>\
-                    </div>\
-                </div>\
-                <div class="req-card__date">30.06.2021</div>\
-                <div class="req-card__name">АРХИВНЫЙАльтернатива реабилитационным VR-тренажерам для детей</div>\
-                <div class="req-card__description">Решения, направленные на формирование представлений об окружающем\
-                    мире и выработку социальных навыков у детей, страдающих эпилепсией и судорожным синдромом</div>\
-                <div class="tags-list">\
-                    <a class="tag">Большие данные</a>\
-                    <a class="tag">Тег2</a>\
-                    <a class="tag">Тег3</a>\
-                </div>\
-            </div>\
-            <div class="req-card__footer"><a target="_blank"\
-                                                 href="https://innovationmap.innoagency.ru/request/?request=14"\
-                                                 class="btn btn-outline-red">Откликнуться</a></div>\
-            <div class="req-card__options" hidden>A1 Департамент труда и социальной защиты города Москвы Здравоохранение Большие данные Автоматизация процессов</div>\
-        </div>')
-
-        setFilters();
+    document.querySelector('#count-active').innerHTML = document.body.querySelectorAll('.req-card').length;
+    if (window.innerWidth <= 625) {
+        $("#req-cards").slick("unslick");
+    }
+    if (document.body.querySelectorAll('.req-card').length < 6) {
+        $('#more-link-wrap').hide();
+    } else {
+        $('#more-link-wrap').show();
+        $('.req-card:nth-child(n + 7)').removeClass('visible');
+        $('.more-link').removeClass('active');
+        $('.more-link').html('Показать еще');
+    }
+    if (window.innerWidth <= 625) {
+        $("#req-cards").slick({
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+          infinite: false,
+          arrows: false,
+          autoplay: true,
+          autoplaySpeed: 15000,
+        });
     }
 }
 
@@ -131,7 +128,7 @@ function defineByOption(cards, option){
         if (option == 'A1')
             count = cards.length;
         else
-            if (cards[i].split('<div className="req-card__options" hidden>').pop().search(option) != -1){
+            if (cards[i].split('<div class="req-card__options" hidden>').pop().search(option) != -1){
                 cards.push(cards[i]);
                 count++;
             }
