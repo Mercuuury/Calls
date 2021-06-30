@@ -1,48 +1,14 @@
-const requestURL = 'http://cors-anywhere.herokuapp.com/http://citycalls.krlv.ml/calls'
-let cardsArr = []
-let cardsHtml = document.querySelector('.req-cards')
-let typeTaskArr = [
-    'Автоматизация процессов',
-    'Адаптированная среда',
-    'Инструменты контроля',
-    'Комфортная среда',
-    'Оптимизация процессов',
-    'Повышение безопасности',
-    'Ресурсосбережение',
-    'Сокращение сроков реабилитации'
-];
-let customerArr = [
-    'Департамент жилищно-коммунального хозяйства города Москвы',
-    'Департамент информационных техологий',
-    'Департамент образования города Москвы',
-    'Департамент природопользования города Москвы',
-    'Департамент строительства города Москвы',
-    'Департамент труда и социальной защиты города Москвы',
-    'Департамет спорта города Москвы'
-]
-let sphereArr = [
-    'Безопасность',
-    'ЖКХ',
-    'Здравоохранение',
-    'Образование',
-    'Социальная сфера',
-    'Спорт',
-    'Строительство',
-    'Экология',
-    'Энергоэффективность'
-]
-let techArr = [
-    'RFID',
-    'Биометрия',
-    'Большие данные',
-    'Инженерная инфраструктура',
-    'Интернет вещей',
-    'Искусственный интеллект',
-    'Компьютерное зрение',
-    'Умные устройства',
-    'Умный материал',
-    'Управление городом'
-]
+const callsURL = 'http://cors-anywhere.herokuapp.com/http://citycalls.krlv.ml/calls';
+const customersURL = 'http://cors-anywhere.herokuapp.com/http://citycalls.krlv.ml/customers';
+const scopesURL = 'http://cors-anywhere.herokuapp.com/http://citycalls.krlv.ml/scope';
+const typeTasksURL = 'http://cors-anywhere.herokuapp.com/http://citycalls.krlv.ml/type-of-problem';
+const techURL = 'http://cors-anywhere.herokuapp.com/http://citycalls.krlv.ml/technology';
+let cardsHtml = document.querySelector('.req-cards');
+let cardsArr = [];
+let typeTaskArr = [];
+let customerArr = [];
+let sphereArr = [];
+let techArr = [];
 
 function sendRequest(url) {
     return fetch(url)
@@ -58,20 +24,62 @@ function sendRequest(url) {
         })
 }
 
-function parseDate(sqlDate){
-    let date = new Date(sqlDate);
-    let day = date.getDate();
-    let month = date.getMonth()+1;
+sendRequest(customersURL)
+    .then(data => updateCustomers(data))
+    .catch(err => console.log(err))
+function updateCustomers(content) {
+    for(let i = 0; i < content.length; i++)
+        customerArr.push(content[i].brandName);
 
-    if(day < 10)
-        day = "0" + day;
-    if(month < 10)
-        month = "0" + month;
-
-    return day + "." + month + "." + date.getFullYear();
+    $.each(customerArr, function(k,v){
+        $('<option value="'+v+'">'+v+'</option>').appendTo("select#customer-select");
+    });
+    $('.city-select').selectpicker('refresh');
 }
 
-function update(content) {
+sendRequest(scopesURL)
+    .then(data => updateScopes(data))
+    .catch(err => console.log(err))
+function updateScopes(content) {
+    for(let i = 0; i < content.length; i++)
+        sphereArr.push(content[i].scopeName);
+
+    $.each(sphereArr, function(k,v){
+        $('<option value="'+v+'">'+v+'</option>').appendTo("select#sphere-select");
+    });
+    $('.city-select').selectpicker('refresh');
+}
+
+sendRequest(typeTasksURL)
+    .then(data => updateTypeTasks(data))
+    .catch(err => console.log(err))
+function updateTypeTasks(content) {
+    for(let i = 0; i < content.length; i++)
+        typeTaskArr.push(content[i].name);
+
+    $.each(typeTaskArr, function(k,v){
+        $('<option value="'+v+'">'+v+'</option>').appendTo("select#typeTask-select");
+    });
+    $('.city-select').selectpicker('refresh');
+}
+
+sendRequest(techURL)
+    .then(data => updateTech(data))
+    .catch(err => console.log(err))
+function updateTech(content) {
+    for(let i = 0; i < content.length; i++)
+        techArr.push(content[i].name);
+
+    $.each(techArr, function(k,v){
+        $('<option value="'+v+'">'+v+'</option>').appendTo("select#tech-select");
+    });
+    $('.city-select').selectpicker('refresh');
+}
+
+sendRequest(callsURL)
+    .then(data => updateCalls(data))
+    .catch(err => console.log(err))
+function updateCalls(content) {
     for(let i = 0; i < content.length; i++){
         cardsArr.push('<div class="req-card">\
             <div class="req-card__top">\
@@ -95,8 +103,50 @@ function update(content) {
         </div>')
     }
     setFilters();
-
     document.querySelector('#count-active').innerHTML = document.body.querySelectorAll('.req-card').length;
+}
+
+function setFilters(){
+    let arr = {};
+    if($('select[name="typeTask"]').val() != ''){
+        typeTask = $('select[name="typeTask"]').val() || [];
+        arr['typeTask'] = $('select[name="typeTask"]').val();
+    }
+    if($('select[name="customer"]').val() != ''){
+        customer = $('select[name="customer"]').val() || [];
+        arr['customer'] = $('select[name="customer"]').val();
+    }
+    if($('select[name="sphere"]').val() != ''){
+        sphere = $('select[name="sphere"]').val() || [];
+        arr['sphere'] = $('select[name="sphere"]').val();
+    }
+    if($('select[name="tech"]').val() != ''){
+        tech = $('select[name="tech"]').val() || [];
+        arr['tech'] = $('select[name="tech"]').val();
+    }
+    if ($('#req-filters__checkbox').is(':checked')){
+        arr['archive'] = 'A1';
+    }else{
+        arr['archive'] = 'A0';
+    }
+    filterCards(arr);
+}
+
+function filterCards(options) {
+    let filteredCardsArr = [];
+    for (let i = 0; i < cardsArr.length; i++)
+        filteredCardsArr.push(cardsArr[i]);
+
+    defineByOption(filteredCardsArr, options.archive);
+    defineByOption(filteredCardsArr, options.customer);
+    defineByOption(filteredCardsArr, options.sphere);
+    defineByOption(filteredCardsArr, options.tech);
+    defineByOption(filteredCardsArr, options.typeTask);
+
+    cardsHtml.innerHTML = '';
+    for(let i = 0; i < filteredCardsArr.length; i++)
+        cardsHtml.innerHTML += filteredCardsArr[i];
+
     if (window.innerWidth <= 625) {
         $("#req-cards").slick("unslick");
     }
@@ -110,13 +160,13 @@ function update(content) {
     }
     if (window.innerWidth <= 625) {
         $("#req-cards").slick({
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: true,
-          infinite: false,
-          arrows: false,
-          autoplay: true,
-          autoplaySpeed: 15000,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+            infinite: false,
+            arrows: false,
+            autoplay: true,
+            autoplaySpeed: 15000,
         });
     }
 }
@@ -128,54 +178,28 @@ function defineByOption(cards, option){
         if (option == 'A1')
             count = cards.length;
         else
-            if (cards[i].split('<div class="req-card__options" hidden>').pop().search(option) != -1){
-                cards.push(cards[i]);
-                count++;
-            }
+        if (cards[i].split('<div class="req-card__options" hidden>').pop().search(option) != -1){
+            cards.push(cards[i]);
+            count++;
+        }
     }
     cards.splice(0, cards.length-count);
 }
 
-function filterCards(options) {
-    let filteredCardsArr = [];
+function parseDate(sqlDate){
+    let date = new Date(sqlDate);
+    let day = date.getDate();
+    let month = date.getMonth()+1;
 
-    for (let i = 0; i < cardsArr.length; i++)
-        filteredCardsArr.push(cardsArr[i]);
+    if(day < 10)
+        day = "0" + day;
+    if(month < 10)
+        month = "0" + month;
 
-     defineByOption(filteredCardsArr, options.archive) //Фильтр по архивированности
-
-     defineByOption(filteredCardsArr, options.customer) //Фильтр по заказчикам
-
-     defineByOption(filteredCardsArr, options.sphere) //Фильтр по сфере применения
-
-     defineByOption(filteredCardsArr, options.tech) //Фильтр по технологии
-
-     defineByOption(filteredCardsArr, options.typeTask) //Фильтр по типу задачи
-
-    cardsHtml.innerHTML = '';
-    for(let i = 0; i < filteredCardsArr.length; i++)
-        cardsHtml.innerHTML += filteredCardsArr[i];
+    return day + "." + month + "." + date.getFullYear();
 }
 
-sendRequest(requestURL)
-    .then(data => update(data))
-    .catch(err => console.log(err))
-
 $(document).ready(function () {
-    $.each(typeTaskArr, function(k,v){
-        $('<option value="'+v+'">'+v+'</option>').appendTo("select#typeTask-select");
-    });
-    $.each(customerArr, function(k,v){
-        $('<option value="'+v+'">'+v+'</option>').appendTo("select#customer-select");
-    });
-    $.each(sphereArr, function(k,v){
-        $('<option value="'+v+'">'+v+'</option>').appendTo("select#sphere-select");
-    });
-    $.each(techArr, function(k,v){
-        $('<option value="'+v+'">'+v+'</option>').appendTo("select#tech-select");
-    });
-    $('.city-select').selectpicker('refresh');
-
     let prevTypeTask,prevCustomer,prevSphere,prevTech;
     $("#typeTask-select").on('hide.bs.select', function(){
         if($('#typeTask-select').val() !== prevTypeTask){
@@ -220,30 +244,3 @@ $(document).ready(function () {
         setFilters();
     });
 });
-
-function setFilters(){
-    let arr = {};
-    if($('select[name="typeTask"]').val() != ''){
-        typeTask = $('select[name="typeTask"]').val() || [];
-        arr['typeTask'] = $('select[name="typeTask"]').val();
-    }
-    if($('select[name="customer"]').val() != ''){
-        customer = $('select[name="customer"]').val() || [];
-        arr['customer'] = $('select[name="customer"]').val();
-    }
-    if($('select[name="sphere"]').val() != ''){
-        sphere = $('select[name="sphere"]').val() || [];
-        arr['sphere'] = $('select[name="sphere"]').val();
-    }
-    if($('select[name="tech"]').val() != ''){
-        tech = $('select[name="tech"]').val() || [];
-        arr['tech'] = $('select[name="tech"]').val();
-    }
-    if ($('#req-filters__checkbox').is(':checked')){
-        arr['archive'] = 'A1';
-    }else{
-        arr['archive'] = 'A0';
-    }
-
-    filterCards(arr);
-}
