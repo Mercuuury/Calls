@@ -1,3 +1,3 @@
 # Calls
-Для запуска прежде требуется зайти на сайт http://cors-anywhere.herokuapp.com/ и нажать кнопочку
-- Последняя версия - 16.06.21 19:10
+First of all click the button on http://cors-anywhere.herokuapp.com/
+- Last version - 30.06.21 18:19
