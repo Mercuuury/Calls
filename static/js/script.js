@@ -1,8 +1,8 @@
-const callsURL = 'http://cors-anywhere.herokuapp.com/http://citycalls.krlv.ml/calls';
-const customersURL = 'http://cors-anywhere.herokuapp.com/http://citycalls.krlv.ml/customers';
-const scopesURL = 'http://cors-anywhere.herokuapp.com/http://citycalls.krlv.ml/scope';
-const typeTasksURL = 'http://cors-anywhere.herokuapp.com/http://citycalls.krlv.ml/type-of-problem';
-const techURL = 'http://cors-anywhere.herokuapp.com/http://citycalls.krlv.ml/technology';
+const callsURL = 'http://citycalls.krlv.ml/calls?expand=customer,scopes,technologies,types,relatedCalls';
+const customersURL = 'http://citycalls.krlv.ml/customers';
+const scopesURL = 'http://citycalls.krlv.ml/scope';
+const typeTasksURL = 'http://citycalls.krlv.ml/type-of-problem';
+const techURL = 'http://citycalls.krlv.ml/technology';
 let cardsHtml = document.querySelector('.req-cards');
 let cardsArr = [];
 let typeTaskArr = [];
@@ -81,6 +81,18 @@ sendRequest(callsURL)
     .catch(err => console.log(err))
 function updateCalls(content) {
     for(let i = 0; i < content.length; i++){
+        let options = '<div class="req-card__options" hidden>A'+content[i].isArchived+' '+content[i].customer.brandName+' ';
+        for(let j = 0; j < content[i].scopes.length; j++)
+            options += content[i].scopes[j].scopeName + ' ';
+        for(let j = 0; j < content[i].technologies.length; j++)
+            options += content[i].technologies[j].name + ' ';
+        for(let j = 0; j < content[i].types.length; j++)
+            options += content[i].types[j].name + ' ';
+
+        let tags = '';
+        for(let j = 0; j < content[i].technologies.length; j++)
+            tags += '<a class="tag">'+content[i].technologies[j].name+'</a>';
+
         cardsArr.push('<div class="req-card">\
             <div class="req-card__top">\
                 <div class="req-card__header">\
@@ -88,18 +100,18 @@ function updateCalls(content) {
                         <svg class="department__logo" width="44px" height="53px">\
                             <use xlink:href="static/img/svg-symbols.svg#moscow-for-fill"></use>\
                         </svg>\
-                        <div class="department__name">Департамент (надо брать из бд)</div>\
+                        <div class="department__name">' + content[i].customer.brandName + '</div>\
                     </div>\
                 </div>\
                 <div class="req-card__date">' + parseDate(content[i].expireDate) + '</div>\
                 <div class="req-card__name">' + content[i].callName + '</div>\
                 <div class="req-card__description">' + content[i].briefDescription + '</div>\
-                <div class="tags-list">Теги (надо брать из бд)</div>\
+                <div class="tags-list">'+ tags +'</div>\
             </div>\
             <div class="req-card__footer"><a target="_blank"\
                                                  href="https://innovationmap.innoagency.ru/request/?request=14"\
                                                  class="btn btn-outline-red">Откликнуться</a></div>\
-            <div class="req-card__options" hidden>A'+content[i].isArchived+' Департамент труда и социальной защиты города Москвы Здравоохранение Большие данные Автоматизация процессов</div>\
+            '+ options +'</div>\
         </div>')
     }
     setFilters();
